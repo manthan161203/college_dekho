@@ -60,3 +60,8 @@ form button {
   color: #007bff;
   text-decoration: none;
 }
+
+.loading {
+  font-size: 1.5em;
+  color: #007bff;
+}
