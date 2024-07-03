@@ -9,10 +9,15 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    let url = `http://universities.hipolabs.com/search?country=${encodeURIComponent(country)}`;
+    if (university) {
+      url += `&name=${encodeURIComponent(university)}`;
+    }
+
     try {
-      const response = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(university)}&country=${encodeURIComponent(country)}`);
+      const response = await fetch(url);
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setResults(data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -29,7 +34,7 @@ function App() {
           id="country" 
           name="country" 
           value={country} 
-          onChange={(e) => setCountry(e.target.value)} // e is the event object passed by onChange
+          onChange={(e) => setCountry(e.target.value)} 
           required 
         />
         <label htmlFor="university">University Name:</label>
@@ -38,8 +43,7 @@ function App() {
           id="university" 
           name="university" 
           value={university} 
-          onChange={(e) => setUniversity(e.target.value)} // e is the event object passed by onChange
-          required 
+          onChange={(e) => setUniversity(e.target.value)} 
         />
         <button type="submit">Search</button>
       </form>
@@ -50,7 +54,7 @@ function App() {
             <p>Country: {university.country}</p>
             <p>State: {university['state-province']}</p>
             <p>
-              Website: <a href={university.web_page}>{university.web_pages}</a>
+              Website: <a href={university.web_pages[0]} target="_blank" rel="noopener noreferrer">{university.web_pages[0]}</a>
             </p>
           </div>
         ))}
