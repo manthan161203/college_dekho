@@ -48,6 +48,7 @@ function App() {
           <div className="card" key={index}>
             <h2>{university.name}</h2>
             <p>Country: {university.country}</p>
+            <p>State: {university['state-province']}</p>
             <p>
               Website: <a href={university.web_page}>{university.web_pages}</a>
             </p>
